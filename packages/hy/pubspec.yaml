@@ -1,0 +1,12 @@
+name: hy
+description: hy base package project.
+version: 0.0.2
+homepage: http://a.gitlab.local:10080/flutter/hy
+
+environment:
+  sdk: ">=2.9.0 <3.0.0"
+
+#dependencies:
+
+dev_dependencies:
+  test: ^1.15.3

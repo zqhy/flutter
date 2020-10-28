@@ -1,0 +1,1 @@
+typedef T PagingDataLoader<T>(dynamic nextPage);

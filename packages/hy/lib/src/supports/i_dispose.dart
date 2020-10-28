@@ -1,0 +1,3 @@
+mixin IDispose {
+  void dispose();
+}
