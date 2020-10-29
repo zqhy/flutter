@@ -1,0 +1,1 @@
+typedef T ContentDataLoader<T>();
