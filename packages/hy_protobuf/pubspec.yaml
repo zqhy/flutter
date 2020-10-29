@@ -1,0 +1,15 @@
+name: hy_protobuf
+description: protobuf package.
+version: 0.0.1
+homepage: http://a.gitlab.local:10080/flutter/hy
+
+environment:
+  sdk: ">=2.9.0 <3.0.0"
+
+dependencies:
+
+  fixnum: ^0.10.11
+  protobuf: ^1.0.1
+
+dev_dependencies:
+  test: ^1.15.3
