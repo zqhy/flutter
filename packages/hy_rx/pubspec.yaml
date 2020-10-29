@@ -1,0 +1,13 @@
+name: hy_rx
+description: A new Flutter package.
+version: 0.0.1
+homepage: http://a.gitlab.local:10080/flutter/hy
+
+environment:
+  sdk: ">=2.9.0 <3.0.0"
+
+dependencies:
+  rxdart: ^0.24.1
+
+dev_dependencies:
+  test: ^1.15.3
