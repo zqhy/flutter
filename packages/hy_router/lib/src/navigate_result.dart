@@ -1,0 +1,3 @@
+enum NavigateResult {
+  canceled, ok
+}
