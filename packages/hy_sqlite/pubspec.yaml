@@ -1,0 +1,13 @@
+name: hy_sqlite
+description: A new Flutter package.
+version: 0.0.1
+homepage: http://a.gitlab.local:10080/flutter/hy
+
+environment:
+  sdk: ">=2.9.0 <3.0.0"
+
+dependencies:
+  sqflite: ^1.3.2+1
+
+dev_dependencies:
+  test: ^1.15.3
