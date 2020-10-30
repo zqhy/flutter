@@ -1,5 +1,7 @@
 # hy通用package
 
+pub中地址：https://pub.flutter-io.cn/packages/hy
+
 运行 dry-run 命令以检验是否所有内容都通过了分析：
 
 ```bash
