@@ -14,6 +14,12 @@ flutter pub publish --dry-run
 flutter pub publish
 ```
 
+如果设置了中国镜像即需要用如下命令提交：
+
+```bash
+flutter packages pub publish --server=https://pub.dartlang.org
+```
+
 连接pub服务器失败：
 
 ```bash
