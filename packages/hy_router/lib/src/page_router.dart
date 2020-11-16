@@ -24,6 +24,8 @@ class PageRouter {
     _routerHandler.addAll(routerConfig);
   }
 
+  static bool contains(String routeName) => _routerHandler.containsKey(routeName);
+
   static PageBuilder getPageBuilder(String routeName) {
     return _routerHandler[routeName].pageBuilder;
   }
