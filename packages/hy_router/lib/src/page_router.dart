@@ -13,7 +13,7 @@ class RouterHandler<RP extends Object> {
   RouterHandler(this.createAppRoute, this.pageBuilder);
 }
 
-String getRouterName<T>(T t) => (t).toString();
+String getRouterName<T>() => (T).toString();
 
 class PageRouter {
   static Map<String, RouterHandler> _routerHandler = new HashMap<String,RouterHandler>(
@@ -24,11 +24,11 @@ class PageRouter {
     _routerHandler.addAll(routerConfig);
   }
 
-  static bool contains(String routeName) => _routerHandler.containsKey(routeName);
+  static bool contains<T>() => containsName(getRouterName<T>());
+  static bool containsName(String routeName) => _routerHandler.containsKey(routeName);
 
-  static PageBuilder getPageBuilder(String routeName) {
-    return _routerHandler[routeName].pageBuilder;
-  }
+  static PageBuilder getPageBuilder<T>() => getPageBuilderFromName(getRouterName<T>());
+  static PageBuilder getPageBuilderFromName(String routeName) => _routerHandler[routeName].pageBuilder;
 
   //region navigate
   static Future<T> navigatePath<T extends Object>(BuildContext context, String path) {
