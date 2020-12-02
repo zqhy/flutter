@@ -8,7 +8,9 @@ extension BehaviorSubjectExt on BehaviorSubject<int> {
   void countdown(int seconds) {
     _countdownSubscription?.cancel();
     _countdownSubscription = Stream.periodic(Duration(seconds: 1), (x) => seconds - x - 1).takeWhile((ticks) => ticks >= 0).startWith(seconds).listen((ticks) {
-      if (!isClosed) {
+      if (isClosed) {
+        _countdownSubscription?.cancel();
+      } else {
         add(ticks);
       }
     }, onError: (error) => _countdownSubscription?.cancel(),
