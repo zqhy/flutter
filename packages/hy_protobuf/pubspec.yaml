@@ -9,7 +9,7 @@ environment:
 dependencies:
 
   fixnum: ^0.10.11
-  protobuf: ^1.0.1
+  protobuf: ^1.1.0
 
 dev_dependencies:
   test: ^1.15.3
