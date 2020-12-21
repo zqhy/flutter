@@ -17,7 +17,7 @@ class DiocObjectContainer implements ObjectContainerRegister, ObjectContainer {
 
   @override
   void register<T>(ObjectCreator<T> creator, {String name}) {
-    _container.register((c) => creator(this), name: name);
+    _container.register((c) => creator(this), name: name, defaultMode: InjectMode.create);
   }
 
   @override

@@ -1,6 +1,6 @@
 name: hy_dioc
 description: hy's ioc container implement.
-version: 0.0.1
+version: 0.0.2
 homepage: http://a.gitlab.local:10080/flutter/hy
 
 environment:
