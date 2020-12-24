@@ -1,6 +1,6 @@
 name: hy_fluttertoast
 description: toast.
-version: 0.0.3
+version: 0.0.4
 homepage: http://a.gitlab.local:10080/flutter/hy
 
 environment:
@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  hy_flutter: ^0.0.2
+  hy_flutter: ^0.0.3
 
   fluttertoast: ^7.1.6
 

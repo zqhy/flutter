@@ -10,28 +10,31 @@ class ToastService extends IToastService {
   @override
   show(String message, {
     ToastLength toastLength,
-    int timeInSec = 2,
+    int timeInSec,
     ToastGravity gravity,
-    double fontSize = 16.0,
-    Color backgroundColor = Colors.black,
-    Color textColor = Colors.white,
+    double fontSize,
+    Color backgroundColor,
+    Color textColor,
   }) {
     if (message?.isNotEmpty != true) {
       return;
     }
     toast.Fluttertoast.showToast(
       msg: message,
-      toastLength: toastLength == null ? null : toastOf(toastLength),
-      timeInSecForIosWeb: timeInSec,
-      gravity: gravity == null ? null : toastGravityOf(gravity),
-      fontSize: fontSize,
-      backgroundColor: backgroundColor,
-      textColor: textColor,
+      toastLength: toastOf(toastLength ?? ToastConfig.defaultToastLength),
+      timeInSecForIosWeb: timeInSec ?? ToastConfig.defaultTimeInSec,
+      gravity: toastGravityOf(gravity ?? ToastConfig.defaultGravity),
+      fontSize: fontSize ?? ToastConfig.defaultFontSize,
+      backgroundColor: backgroundColor ?? ToastConfig.defaultBackgroundColor,
+      textColor: textColor ?? ToastConfig.defaultTextColor,
     );
   }
 }
 
 toast.Toast toastOf(ToastLength toastLength) {
+  if (toastLength == null) {
+    return null;
+  }
   switch (toastLength) {
     case ToastLength.LENGTH_SHORT:
       return toast.Toast.LENGTH_SHORT;
@@ -43,6 +46,10 @@ toast.Toast toastOf(ToastLength toastLength) {
 }
 
 toast.ToastGravity toastGravityOf(ToastGravity gravity) {
+  if (gravity == null) {
+    return null;
+  }
+
   switch (gravity) {
     case ToastGravity.TOP:
       return toast.ToastGravity.TOP;
