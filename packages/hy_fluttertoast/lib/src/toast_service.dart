@@ -10,6 +10,7 @@ class ToastService extends IToastService {
   @override
   show(String message, {
     ToastLength toastLength,
+    int timeInSec = 2,
     ToastGravity gravity,
     double fontSize = 16.0,
     Color backgroundColor = Colors.black,
@@ -21,6 +22,7 @@ class ToastService extends IToastService {
     toast.Fluttertoast.showToast(
       msg: message,
       toastLength: toastLength == null ? null : toastOf(toastLength),
+      timeInSecForIosWeb: timeInSec,
       gravity: gravity == null ? null : toastGravityOf(gravity),
       fontSize: fontSize,
       backgroundColor: backgroundColor,

@@ -1,6 +1,6 @@
 name: hy_fluttertoast
 description: toast.
-version: 0.0.2
+version: 0.0.3
 homepage: http://a.gitlab.local:10080/flutter/hy
 
 environment:
