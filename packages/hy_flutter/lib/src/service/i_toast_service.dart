@@ -7,6 +7,7 @@ enum ToastGravity { TOP, BOTTOM, CENTER, TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTO
 abstract class IToastService{
   show(String message, {
     ToastLength toastLength,
+    int timeInSec = 2,
     ToastGravity gravity,
     double fontSize = 16.0,
     Color backgroundColor,
