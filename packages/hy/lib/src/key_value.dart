@@ -1,7 +1,7 @@
 
 class KeyValue<K, V> {
   final K key;
-  final V value;
+  final V? value;
 
   const KeyValue(this.key, this.value);
 
