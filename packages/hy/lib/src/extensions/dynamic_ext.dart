@@ -17,13 +17,11 @@ extension DynamicExt on dynamic {
     switch (this.runtimeType) {
       case String:
         return this.trim().isEmpty;
-        break;
       case List:
       case Map:
       case Set:
       case Iterable:
         return this.isEmpty;
-        break;
       default:
         return this.toString() == 'null' || this.toString().trim().isEmpty;
     }
