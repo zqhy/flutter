@@ -14,7 +14,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _channelInfo = 'Unknown';
+  String? _channel;
 
   @override
   void initState() {
@@ -24,7 +24,7 @@ class _MyAppState extends State<MyApp> {
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initChannelState() async {
-    String channelInfo;
+    String? channelInfo;
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       channelInfo = await HyChannelInfo.channelInfo;
@@ -38,7 +38,7 @@ class _MyAppState extends State<MyApp> {
     if (!mounted) return;
 
     setState(() {
-      _channelInfo = channelInfo;
+      _channel = channelInfo;
     });
   }
 
@@ -50,7 +50,7 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Text('Running on: $_channelInfo\n'),
+          child: Text('Running on: ${_channel ?? 'Unknown'}\n'),
         ),
       ),
     );

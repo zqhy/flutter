@@ -23,7 +23,7 @@ class QueryComposer {
 
   static Map<String, List<dynamic>> whereAnd(Map<String, dynamic> wheres) {
     final where = StringBuffer();
-    final whereArgs = List<dynamic>();
+    final whereArgs = <dynamic>[];
     wheres.forEach((filed, value) {
       if (value != null) {
         if (where.length > 0) {
