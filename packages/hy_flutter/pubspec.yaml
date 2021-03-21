@@ -1,6 +1,6 @@
 name: hy_flutter
 description: hy's flutter base package.
-version: 0.0.3
+version: 1.0.0
 homepage: http://a.gitlab.local:10080/flutter/hy
 
 environment:
