@@ -11,16 +11,16 @@ const double _kWindowVerticalPadding = 0.0;
 const double _kWindowWidthStep = 56.0;
 const double _kWindowScreenPadding = 0.0;
 
-Future<T> showAsDropDown<T>(BuildContext context, {
-  @required Widget popupWindow,
+Future<T?> showAsDropDown<T>(BuildContext context, {
+  required Widget popupWindow,
   Offset offset = Offset.zero,
   bool fullWidth = true,
 }) {
   ///获取本控件的渲染对象
-  final RenderBox button = context.findRenderObject();
+  final RenderBox button = context.findRenderObject() as RenderBox;
 
   ///获取本控件覆盖物的渲染对象
-  final RenderBox overlay = Overlay.of(context).context.findRenderObject();
+  final RenderBox overlay = Overlay.of(context)?.context.findRenderObject() as RenderBox;
 
   ///计算弹窗的弹出位置，widget.offset为偏移数据，默认在button底部弹出。
   final RelativeRect position = new RelativeRect.fromRect(
@@ -33,7 +33,7 @@ Future<T> showAsDropDown<T>(BuildContext context, {
     Offset.zero & overlay.size,
   );
 
-  return showPopupWindow<T>(
+  return showPopupWindow(
     context: context,
     popupWindow: popupWindow,
     position: position,
@@ -42,25 +42,24 @@ Future<T> showAsDropDown<T>(BuildContext context, {
 }
 
 ///弹窗方法
-Future<T> showPopupWindow<T>({
-  @required BuildContext context,
-  @required Widget popupWindow,
+Future<T?> showPopupWindow<T>({
+  required BuildContext context,
+  required Widget popupWindow,
   double elevation: 8.0,
-  String semanticLabel,
-  RelativeRect position,
-  bool fullWidth,
+  String? semanticLabel,
+  required RelativeRect position,
+  bool fullWidth: false,
 }) {
-  assert(context != null);
-  String label = semanticLabel;
+  var label = semanticLabel;
   switch (defaultTargetPlatform) {
     case TargetPlatform.iOS:
       label = semanticLabel;
       break;
     default:
-      label = semanticLabel ?? MaterialLocalizations.of(context)?.popupMenuLabel;
+      label = semanticLabel ?? MaterialLocalizations.of(context).popupMenuLabel;
   }
 
-  return Navigator.push(
+  return Navigator.push<T>(
       context,
       new _PopupWindowRoute(
         // context: context,
@@ -79,33 +78,31 @@ Future<T> showPopupWindow<T>({
 class _PopupWindowRoute<T> extends PopupRoute<T> {
   _PopupWindowRoute({
     // @required BuildContext context,
-    RouteSettings settings,
-    this.child,
-    this.position,
+    RouteSettings? settings,
+    required this.child,
+    required this.position,
     this.elevation: 8.0,
     this.theme,
     this.barrierLabel,
     this.semanticLabel,
-    this.fullWidth,
-  }) : super(settings: settings) {
-    assert(child != null);
-  }
+    this.fullWidth: false,
+  }) : super(settings: settings);
 
   final Widget child;
   final RelativeRect position;
   double elevation;
-  final ThemeData theme;
-  final String semanticLabel;
+  final ThemeData? theme;
+  final String? semanticLabel;
   final bool fullWidth;
 
   @override
-  Color get barrierColor => null;
+  Color? get barrierColor => null;
 
   @override
   bool get barrierDismissible => true;
 
   @override
-  final String barrierLabel;
+  final String? barrierLabel;
 
   @override
   Duration get transitionDuration => _kWindowDuration;
@@ -129,8 +126,9 @@ class _PopupWindowRoute<T> extends PopupRoute<T> {
       fullWidth: fullWidth,
       maxHeight: maxHeight,
     );
+
     if (theme != null) {
-      win = new Theme(data: theme, child: win);
+      win = new Theme(data: theme!, child: win);
     }
 
     print("位置：$position");
@@ -156,15 +154,15 @@ class _PopupWindowRoute<T> extends PopupRoute<T> {
 ///自定义弹窗控件：对自定义的弹窗内容进行再包装，添加长宽、动画等约束条件
 class _PopupWindow<T> extends StatelessWidget {
   const _PopupWindow({
-    Key key,
-    this.route,
+    Key? key,
+    required this.route,
     this.semanticLabel,
     this.fullWidth: false,
-    this.maxHeight,
+    required this.maxHeight,
   }) : super(key: key);
 
   final _PopupWindowRoute<T> route;
-  final String semanticLabel;
+  final String? semanticLabel;
   final bool fullWidth;
   final double maxHeight;
 
@@ -196,17 +194,17 @@ class _PopupWindow<T> extends StatelessWidget {
     );
 
     return new AnimatedBuilder(
-      animation: route.animation,
-      builder: (BuildContext context, Widget child) {
+      animation: route.animation!,
+      builder: (BuildContext context, Widget? child) {
         return new Opacity(
-          opacity: opacity.evaluate(route.animation),
+          opacity: opacity.evaluate(route.animation!),
           child: new Material(
             type: MaterialType.card,
             elevation: route.elevation,
             child: new Align(
               alignment: AlignmentDirectional.topEnd,
-              widthFactor: width.evaluate(route.animation),
-              heightFactor: height.evaluate(route.animation),
+              widthFactor: width.evaluate(route.animation!),
+              heightFactor: height.evaluate(route.animation!),
               child: new Semantics(
                 scopesRoute: true,
                 namesRoute: true,
@@ -229,15 +227,15 @@ class _PopupWindowLayoutDelegate extends SingleChildLayoutDelegate {
       this.position, this.selectedItemOffset, this.textDirection);
 
   final RelativeRect position;
-  final double selectedItemOffset;
+  final double? selectedItemOffset;
   final TextDirection textDirection;
 
   @override
   BoxConstraints getConstraintsForChild(BoxConstraints constraints) {
     // The menu can be at most the size of the overlay minus 8.0 pixels in each
     // direction.
-    return new BoxConstraints.loose(constraints.biggest -
-        const Offset(_kWindowScreenPadding * 2.0, _kWindowScreenPadding * 2.0));
+    return new BoxConstraints.loose((constraints.biggest -
+        const Offset(_kWindowScreenPadding * 2.0, _kWindowScreenPadding * 2.0)) as Size);
   }
 
   @override
@@ -253,7 +251,7 @@ class _PopupWindowLayoutDelegate extends SingleChildLayoutDelegate {
     } else {
       y = position.top +
           (size.height - position.top - position.bottom) / 2.0 -
-          selectedItemOffset;
+          (selectedItemOffset ?? 0);
     }
 
     // Find the ideal horizontal position.
@@ -266,7 +264,6 @@ class _PopupWindowLayoutDelegate extends SingleChildLayoutDelegate {
       x = position.left;
     } else {
       // Menu button is equidistant from both edges, so grow in reading direction.
-      assert(textDirection != null);
       switch (textDirection) {
         case TextDirection.rtl:
           x = size.width - position.right - childSize.width;

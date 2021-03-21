@@ -4,31 +4,31 @@ class SingleSelectionDropdownView<ITEM> extends StatelessWidget {
 
   final List<ITEM> options;
   final String Function(ITEM item) getTitle;
-  final ITEM selected;
-  final Color backgroundColor;
-  final TextStyle textStyle;
-  final TextStyle selectedTextStyle;
-  final DividerThemeData dividerTheme;
-  final Widget Function(BuildContext context, ITEM item) createItemView;
+  final ITEM? selected;
+  final Color? backgroundColor;
+  final TextStyle? textStyle;
+  final TextStyle? selectedTextStyle;
+  final DividerThemeData? dividerTheme;
+  final Widget Function(BuildContext context, ITEM item)? createItemView;
   final int columnNum;
 
   SingleSelectionDropdownView({
-    Key key,
-    @required this.options,
-    @required this.getTitle,
+    Key? key,
+    required this.options,
+    required this.getTitle,
     this.selected,
     this.backgroundColor,
     this.textStyle,
     this.selectedTextStyle,
     this.dividerTheme,
-    this.createItemView,
+    required this.createItemView,
     this.columnNum = 2,
   }) : super(key: key);
 
   SingleSelectionDropdownView.builder({
-    Key key,
-    @required this.options,
-    @required this.getTitle,
+    Key? key,
+    required this.options,
+    required this.getTitle,
     this.selected,
     this.backgroundColor,
     this.textStyle,
@@ -38,12 +38,12 @@ class SingleSelectionDropdownView<ITEM> extends StatelessWidget {
   }) : createItemView = null;
 
   SingleSelectionDropdownView.custom({
-    Key key,
-    @required this.options,
-    @required this.getTitle,
+    Key? key,
+    required this.options,
+    required this.getTitle,
     this.selected,
     this.backgroundColor,
-    @required this.createItemView,
+    required this.createItemView,
     this.columnNum = 2,
   }) : textStyle = null,
         selectedTextStyle = null,
@@ -52,7 +52,7 @@ class SingleSelectionDropdownView<ITEM> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> child = [];
-    Row row;
+    Row? row;
     var rowIndex = 0;
     for (int i = 0; i < options.length; i++) {
       final option = options[i];
@@ -79,7 +79,7 @@ class SingleSelectionDropdownView<ITEM> extends StatelessWidget {
         );
         rowIndex++;
       }
-      row.children.add(
+      row?.children.add(
         Expanded(
           flex: 1,
           child: InkWell(
@@ -108,13 +108,13 @@ class SingleSelectionDropdownItemView<ITEM> extends StatelessWidget {
 
   final String title;
   final bool isSelected;
-  final TextStyle textStyle;
-  final TextStyle selectedTextStyle;
+  final TextStyle? textStyle;
+  final TextStyle? selectedTextStyle;
 
   const SingleSelectionDropdownItemView({
-    Key key,
-    @required this.title,
-    @required this.isSelected,
+    Key? key,
+    required this.title,
+    required this.isSelected,
     this.textStyle,
     this.selectedTextStyle
   }) : super(key: key);
@@ -135,7 +135,7 @@ class SingleSelectionDropdownItemView<ITEM> extends StatelessWidget {
                 visible: isSelected,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 8),
-                  child: Icon(Icons.check, size: 20, color: selectedTextStyle.color),
+                  child: Icon(Icons.check, size: 20, color: selectedTextStyle?.color),
                 ),
               ),
             ),
