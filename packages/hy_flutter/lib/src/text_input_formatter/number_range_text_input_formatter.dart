@@ -2,14 +2,14 @@ import 'package:flutter/services.dart';
 
 class NumberRangeTextInputFormatter extends TextInputFormatter {
 
-  final int _min;
-  final int _max;
+  final int? _min;
+  final int? _max;
 
   NumberRangeTextInputFormatter(this._min, this._max);
 
   @override
   TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
-    if(newValue.text?.isNotEmpty == true) {
+    if(newValue.text.isNotEmpty == true) {
       final value = int.tryParse(newValue.text);
       if (value == null) {
         return TextEditingValue();

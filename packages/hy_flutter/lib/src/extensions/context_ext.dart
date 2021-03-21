@@ -118,10 +118,10 @@ extension ContextExt on BuildContext {
   /// if the device width is less than 300  return [watch] value.
   /// in other cases return [mobile] value.
   T responsiveValue<T>({
-    T mobile,
-    T tablet,
-    T desktop,
-    T watch,
+    required T mobile,
+    T? tablet,
+    T? desktop,
+    T? watch,
   }) {
     double deviceWidth = mediaQuerySize.shortestSide;
 
