@@ -21,7 +21,7 @@ class QueryComposer {
     return "$field NOT IN (${buffer.toString()})";
   }
 
-  static Map<String, List<dynamic>> whereAnd(Map<String, dynamic> wheres) {
+  static Map<String, List<dynamic>>? whereAnd(Map<String, dynamic> wheres) {
     final where = StringBuffer();
     final whereArgs = <dynamic>[];
     wheres.forEach((filed, value) {

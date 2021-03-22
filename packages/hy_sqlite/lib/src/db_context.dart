@@ -6,16 +6,16 @@ import 'event/db_event.dart';
 
 abstract class IDbContext {
   void setConnectionString(String connectionString);
-  String get connectionString;
-  Future<Database> get database;
+  String? get connectionString;
+  Future<Database?> get database;
   Stream<DbEvent> get event;
   void sendEvent(DbEvent event);
   void dispose();
 }
 
 abstract class DbContext implements IDbContext {
-  String _connectionString;
-  Database _database;
+  String? _connectionString;
+  Database? _database;
 
   DbContext(this._connectionString);
 
@@ -31,19 +31,21 @@ abstract class DbContext implements IDbContext {
   }
 
   @override
-  String get connectionString => _connectionString;
+  String? get connectionString => _connectionString;
 
   @override
-  Future<Database> get database async {
-    if (_connectionString == null) {
+  Future<Database?> get database async {
+    final connectionString = _connectionString;
+    if (connectionString == null) {
       return null;
     }
-    if (_database != null && !_database.path.contains(_connectionString)) {
-      await _database.close();
+    final database = _database;
+    if (database != null && !database.path.contains(connectionString)) {
+      await _database?.close();
       _database = null;
     }
     if (_database == null) {
-      _database = await createDatabase(_connectionString);
+      _database = await createDatabase(connectionString);
     }
     return _database;
   }

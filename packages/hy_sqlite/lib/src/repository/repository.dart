@@ -17,18 +17,18 @@ abstract class Repository<TModel> implements IRepository<TModel> {
   String get table => (TModel).toString().toLowerCase();
 
   @override
-  Future<TModel> getFirstOrDefault({bool distinct, List<String> columns, String where,
-    List<dynamic> whereArgs, String groupBy, String having, String orderBy}) async {
+  Future<TModel?> getFirstOrDefault({bool? distinct, List<String>? columns, String? where,
+    List<Object?>? whereArgs, String? groupBy, String? having, String? orderBy}) async {
 
-    final Database db = await _dbContext.database;
+    final db = await _dbContext.database;
     if (db == null) {
       return null;
     }
 
-    final List<Map<String, dynamic>> maps = await db.query(table,
+    final maps = await db.query(table,
         distinct: distinct, columns: columns, where: where, whereArgs: whereArgs, groupBy: groupBy, having: having, orderBy: orderBy, limit: 1);
 
-    if (maps == null || maps.length == 0) {
+    if (maps.length == 0) {
       return null;
     }
 
@@ -36,13 +36,13 @@ abstract class Repository<TModel> implements IRepository<TModel> {
   }
 
   @override
-  Future<List<TModel>> query({bool distinct, List<String> columns, String where, List<dynamic> whereArgs, String groupBy, String having, String orderBy, int limit, int offset}) async {
-    final Database db = await _dbContext.database;
+  Future<List<TModel>?> query({bool? distinct, List<String>? columns, String? where, List<Object?>? whereArgs, String? groupBy, String? having, String? orderBy, int? limit, int? offset}) async {
+    final db = await _dbContext.database;
     if (db == null) {
       return null;
     }
 
-    final List<Map<String, dynamic>> maps = await db.query(table,
+    final maps = await db.query(table,
         distinct: distinct, columns: columns, where: where, whereArgs: whereArgs, groupBy: groupBy, having: having, orderBy: orderBy, limit: limit, offset: offset);
 
     return List.generate(maps.length, (i) {
@@ -51,8 +51,8 @@ abstract class Repository<TModel> implements IRepository<TModel> {
   }
 
   @override
-  Future<int> insert(TModel model, {String nullColumnHack, ConflictAlgorithm conflictAlgorithm}) async {
-    final Database db = await _dbContext.database;
+  Future<int?> insert(TModel model, {String? nullColumnHack, ConflictAlgorithm? conflictAlgorithm}) async {
+    final db = await _dbContext.database;
     if (db == null) {
       return null;
     }
@@ -63,9 +63,9 @@ abstract class Repository<TModel> implements IRepository<TModel> {
     return result;
   }
   @override
-  Future<List<dynamic>> batchInsert(Iterable<TModel> models, {String nullColumnHack, ConflictAlgorithm conflictAlgorithm,
-        bool exclusive, bool noResult, bool continueOnError}) async {
-    final Database db = await _dbContext.database;
+  Future<List<Object?>?> batchInsert(Iterable<TModel> models, {String? nullColumnHack, ConflictAlgorithm? conflictAlgorithm,
+        bool? exclusive, bool? noResult, bool? continueOnError}) async {
+    final db = await _dbContext.database;
     if (db == null) {
       return null;
     }
@@ -81,8 +81,8 @@ abstract class Repository<TModel> implements IRepository<TModel> {
   }
 
   @override
-  Future<int> update(TModel model, {String where, List<dynamic> whereArgs, ConflictAlgorithm conflictAlgorithm}) async {
-    final Database db = await _dbContext.database;
+  Future<int?> update(TModel model, {String? where, List<Object?>? whereArgs, ConflictAlgorithm? conflictAlgorithm}) async {
+    final db = await _dbContext.database;
     if (db == null) {
       return null;
     }
@@ -93,16 +93,16 @@ abstract class Repository<TModel> implements IRepository<TModel> {
     return result;
   }
   @override
-  Future<List<dynamic>> batchUpdate(Iterable<TModel> models, {String where(TModel model), List<dynamic> whereArgs(TModel model), ConflictAlgorithm conflictAlgorithm,
-        bool exclusive, bool noResult, bool continueOnError}) async {
-    final Database db = await _dbContext.database;
+  Future<List<Object?>?> batchUpdate(Iterable<TModel> models, {String where(TModel model)?, List<Object?> whereArgs(TModel model)?, ConflictAlgorithm? conflictAlgorithm,
+        bool? exclusive, bool? noResult, bool? continueOnError}) async {
+    final db = await _dbContext.database;
     if (db == null) {
       return null;
     }
 
     final batch = db.batch();
     models.forEach((model) {
-      batch.update(table, toMap(model), where: where(model), whereArgs: whereArgs(model), conflictAlgorithm: conflictAlgorithm);
+      batch.update(table, toMap(model), where: where == null ? null : where(model), whereArgs: whereArgs == null ? null : whereArgs(model), conflictAlgorithm: conflictAlgorithm);
     });
     var result =  await batch.commit(exclusive: exclusive, noResult: noResult, continueOnError: continueOnError);
     final ids = models.map((e) => getId(e)).where((element) => element != null).toList();
@@ -110,9 +110,9 @@ abstract class Repository<TModel> implements IRepository<TModel> {
     return result;
   }
   @override
-  Future<int> updateValues(Map<String, dynamic> values,
-      {String where, List<dynamic> whereArgs, ConflictAlgorithm conflictAlgorithm}) async {
-    final Database db = await _dbContext.database;
+  Future<int?> updateValues(Map<String, Object?> values,
+      {String? where, List<Object?>? whereArgs, ConflictAlgorithm? conflictAlgorithm}) async {
+    final db = await _dbContext.database;
     if (db == null) {
       return null;
     }
@@ -123,8 +123,8 @@ abstract class Repository<TModel> implements IRepository<TModel> {
   }
 
   @override
-  Future<int> delete({String where, List<dynamic> whereArgs}) async {
-    final Database db = await _dbContext.database;
+  Future<int?> delete({String? where, List<Object?>? whereArgs}) async {
+    final db = await _dbContext.database;
     if (db == null) {
       return null;
     }
@@ -134,16 +134,16 @@ abstract class Repository<TModel> implements IRepository<TModel> {
     return result;
   }
   @override
-  Future<List<dynamic>> batchDelete<T>(Iterable<T> list, {String where(T item), List<dynamic> whereArgs(T item),
-    bool exclusive, bool noResult, bool continueOnError}) async {
-    final Database db = await _dbContext.database;
+  Future<List<Object?>?> batchDelete<T>(Iterable<T> list, {String where(T item)?, List<Object?> whereArgs(T item)?,
+    bool? exclusive, bool? noResult, bool? continueOnError}) async {
+    final db = await _dbContext.database;
     if (db == null) {
       return null;
     }
 
     final batch = db.batch();
     list.forEach((item) {
-      batch.delete(table, where: where(item), whereArgs: whereArgs(item));
+      batch.delete(table, where: where == null ? null : where(item), whereArgs: whereArgs == null ? null : whereArgs(item));
     });
     var result =  await batch.commit(exclusive: exclusive, noResult: noResult, continueOnError: continueOnError);
     _dbContext.sendEvent(DbEvent(DbOperationType.delete, TModel, result));

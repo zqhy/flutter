@@ -3,7 +3,7 @@ import '../types/db_operation_type.dart';
 class DbEvent {
   final DbOperationType operationType;
   final Type table;
-  final List<dynamic> ids;
+  final List<dynamic>? ids;
 
   DbEvent(this.operationType, this.table, this.ids);
 
