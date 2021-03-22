@@ -1,6 +1,6 @@
 class ReturnRouterInfo {
   final String name;
-  final Object arguments;
+  final Object? arguments;
 
   ReturnRouterInfo(this.name, this.arguments);
 
