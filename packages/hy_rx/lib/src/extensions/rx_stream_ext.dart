@@ -8,8 +8,8 @@ extension RxStreamExt<T> on Stream<T> {
   }
 
   BehaviorSubject<T> toBehaviorSubjectSeeded(T seedValue, {
-    void Function() onListen,
-    void Function() onCancel,
+    void Function()? onListen,
+    void Function()? onCancel,
     bool sync = false,
   }) {
     final subject = BehaviorSubject<T>.seeded(seedValue, onListen: onListen, onCancel: onCancel, sync: sync);
