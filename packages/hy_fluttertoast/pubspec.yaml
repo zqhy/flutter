@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  hy_flutter: ^1.0.0
+  hy_flutter: ^1.0.1
   fluttertoast: ^8.0.3
 
 dev_dependencies:
