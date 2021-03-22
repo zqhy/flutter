@@ -7,7 +7,7 @@ class RxContentLoader<C> with IDispose, RxContentBloc<C> {
 
   final ContentDataLoader<Future<C>> getContent;
 
-  RxContentLoader({this.getContent});
+  RxContentLoader({required this.getContent});
 
   @override
   Future<C> getContentData() => getContent();

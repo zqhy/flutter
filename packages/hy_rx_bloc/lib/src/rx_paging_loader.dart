@@ -6,7 +6,7 @@ class RxPagingLoader<ITEM, C extends Paging<ITEM>> with IDispose, RxPagingBloc<I
 
   final PagingDataLoader<Future<C>> getPaging;
 
-  RxPagingLoader({this.getPaging});
+  RxPagingLoader({required this.getPaging});
 
   @override
   Future<C> getPagingData(dynamic nextPage) => getPaging(nextPage);

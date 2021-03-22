@@ -5,19 +5,19 @@ import 'package:hy/hy.dart';
 import '../content_data_loader.dart';
 
 extension ContentLoaderExt<C> on ContentDataLoader<Future<C>> {
-  Stream<Progress<Result>> loadBy(Stream<ContentLoaderOperate> trigger) {
-    ContentLoaderOperate operate;
+  Stream<Progress<Result>?> loadBy(Stream<ContentLoaderOperate> trigger) {
+    ContentLoaderOperate? operate;
     return trigger
         .doOnData((contentLoaderOperate) => operate = contentLoaderOperate)
         .switchMap<Progress<Result>>((t) =>
         Stream.fromFuture(this())
             .map<Result>((value) => Success<C>(value))
             .onErrorReturnWith((error) {
-              operate.onError?.also((onError) {
-                onError(error);
-              });
-              return Failure(error);
-            })
+          operate?.onError?.also((onError) {
+            onError(error);
+          });
+          return Failure(error);
+        })
             .map<Progress<Result>>((result) => Complete(result: result))
             .startWith(InProgress<Result>())
     );
@@ -25,7 +25,7 @@ extension ContentLoaderExt<C> on ContentDataLoader<Future<C>> {
 }
 
 class ContentLoaderOperate {
-  final void Function(dynamic error) onError;
+  final void Function(dynamic error)? onError;
 
   ContentLoaderOperate({this.onError});
 }

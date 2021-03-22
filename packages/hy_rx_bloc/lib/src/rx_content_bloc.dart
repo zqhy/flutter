@@ -10,29 +10,29 @@ mixin RxContentBloc<C> on IDispose {
 
   final _contentTrigger = BehaviorSubject<ContentLoaderOperate>();
 
-  Stream<Progress<Result>> _contentLoad;
-  Stream<Progress<Result>> get contentLoad {
+  Stream<Progress<Result>?>? _contentLoad;
+  Stream<Progress<Result>?> get contentLoad {
     _contentLoad ??= getContentData.loadBy(_contentTrigger.stream).share().startWith(null);
-    return _contentLoad;
+    return _contentLoad!;
   }
 
-  Stream<Progress> get contentProgress => contentLoad.distinct();
+  Stream<Progress?> get contentProgress => contentLoad.distinct();
 
-  BehaviorSubject<C> _content;
-  BehaviorSubject<C> get content {
+  BehaviorSubject<C?>? _content;
+  BehaviorSubject<C?> get content {
     _content ??= contentLoad
-        .flatMap<C>((progress) {
-          final pagingContent = progress.contentOrNull();
+        .flatMap<C?>((progress) {
+          final pagingContent = progress?.contentOrNull();
           return pagingContent == null ? Stream.empty() : Stream.value(pagingContent);
         })
         .toBehaviorSubjectSeeded(null);
-    return _content;
+    return _content!;
   }
-  C get currentContent => content.value;
+  C? get currentContent => content.value;
 
-  BehaviorSubject<EmptyState> _contentEmptyState;
+  BehaviorSubject<EmptyState>? _contentEmptyState;
   BehaviorSubject<EmptyState> get contentEmptyState {
-    _contentEmptyState ??= Rx.combineLatest2<Progress<Result>, C, EmptyState>(
+    _contentEmptyState ??= Rx.combineLatest2<Progress<Result>?, C?, EmptyState>(
         contentLoad, content, (progress, content) {
       if (content == null || ((content is Iterable) && content.isEmpty)) {
         if (progress is Complete) {
@@ -50,10 +50,10 @@ mixin RxContentBloc<C> on IDispose {
         return HasContent(content);
       }
     }).distinct().toBehaviorSubject();
-    return _contentEmptyState;
+    return _contentEmptyState!;
   }
 
-  Future<void> load({void onError(dynamic error)}) async {
+  Future<void> load({void onError(dynamic error)?}) async {
     _contentTrigger.add(ContentLoaderOperate(onError: onError));
     await contentProgress.firstWhere((progress) => progress is Complete);
   }

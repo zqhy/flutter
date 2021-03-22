@@ -3,10 +3,10 @@ import 'package:rxdart/rxdart.dart';
 import 'package:hy/hy.dart';
 
 extension PagingLoaderExt<ITEM, C extends Paging<ITEM>> on PagingDataLoader<Future<C>> {
-  Stream<Progress<Result>> loadBy(Stream<PagingLoadOperate> trigger) {
+  Stream<Progress<Result>?> loadBy(Stream<PagingLoadOperate> trigger) {
     dynamic nextPage;
     var isNotMore = false;
-    PagingLoadOperate operate;
+    PagingLoadOperate? operate;
     List<ITEM> _lastListItems = [];
     return trigger
       .takeWhile((operate) => !isNotMore || operate.type == PagingLoadType.ReLoad)
@@ -17,7 +17,7 @@ extension PagingLoaderExt<ITEM, C extends Paging<ITEM>> on PagingDataLoader<Futu
             .map<Result>((C paging) {
               nextPage = paging.nextPage;
               isNotMore = nextPage == null;
-              if (operate.type == PagingLoadType.LoadNext) {
+              if (operate?.type == PagingLoadType.LoadNext) {
                 _lastListItems.addAll(paging.items);
               } else {
                 _lastListItems = paging.items;
@@ -26,7 +26,7 @@ extension PagingLoaderExt<ITEM, C extends Paging<ITEM>> on PagingDataLoader<Futu
               return Success<C>(paging);
             })
             .onErrorReturnWith((error) {
-              operate.onError?.also((onError) {
+              operate?.onError?.also((onError) {
                 onError(error);
               });
               return Failure(error);
@@ -43,7 +43,7 @@ enum PagingLoadType {
 
 class PagingLoadOperate {
   final PagingLoadType type;
-  final void Function(dynamic error) onError;
+  final void Function(dynamic error)? onError;
 
   PagingLoadOperate(this.type, {this.onError});
 }

@@ -10,35 +10,35 @@ mixin RxPagingBloc<ITEM, C extends Paging<ITEM>> on IDispose {
 
   final _pagingTrigger = BehaviorSubject<PagingLoadOperate>();
 
-  Stream<Progress<Result>> _pagingLoad;
-  Stream<Progress<Result>> get pagingLoad {
+  Stream<Progress<Result>?>? _pagingLoad;
+  Stream<Progress<Result>?> get pagingLoad {
     _pagingLoad ??= getPagingData.loadBy(_pagingTrigger.stream).share().startWith(null);
-    return _pagingLoad;
+    return _pagingLoad!;
   }
 
-  Stream<Progress> get pagingProgress => pagingLoad.distinct();
+  Stream<Progress?> get pagingProgress => pagingLoad.distinct();
 
   Stream<C> get paging => pagingLoad
       .flatMap<C>((progress) {
-        final paging = progress.contentOrNull();
+        final paging = progress?.contentOrNull();
         return paging == null ? Stream.empty() : Stream.value(paging);
       });
 
-  BehaviorSubject<List<ITEM>> _listItems;
-  BehaviorSubject<List<ITEM>> get listItems {
+  BehaviorSubject<List<ITEM>?>? _listItems;
+  BehaviorSubject<List<ITEM>?> get listItems {
     _listItems ??= pagingLoad
         .flatMap<List<ITEM>>((progress) {
-          final paging = progress.contentOrNull();
+          final paging = progress?.contentOrNull();
           return paging == null ? Stream.empty() : Stream.value(paging.items);
         })
         .toBehaviorSubjectSeeded([]);
-    return _listItems;
+    return _listItems!;
   }
-  List<ITEM> get currentListItems => listItems.value;
+  List<ITEM>? get currentListItems => listItems.value;
 
-  BehaviorSubject<EmptyState> _pagingEmptyState;
+  BehaviorSubject<EmptyState>? _pagingEmptyState;
   BehaviorSubject<EmptyState> get pagingEmptyState {
-    _pagingEmptyState ??= Rx.combineLatest2<Progress<Result>, List<ITEM>, EmptyState>(
+    _pagingEmptyState ??= Rx.combineLatest2<Progress<Result>?, List<ITEM>?, EmptyState>(
         pagingLoad, listItems, (progress, listItems) {
       if (listItems == null || listItems.isEmpty) {
         if (progress is Complete) {
@@ -56,24 +56,24 @@ mixin RxPagingBloc<ITEM, C extends Paging<ITEM>> on IDispose {
         return HasContent(listItems);
       }
     }).distinct().toBehaviorSubject();
-    return _pagingEmptyState;
+    return _pagingEmptyState!;
   }
 
   Stream<bool> get isHasNext => paging
-      .map((paging) => paging?.nextPage != null)
+      .map((paging) => paging.nextPage != null)
       .startWith(false);
 
-  Stream<PagingViewInfo<ITEM>> get pagingView => Rx.combineLatest3<EmptyState, List<ITEM>, bool, PagingViewInfo<ITEM>>(
+  Stream<PagingViewInfo<ITEM>> get pagingView => Rx.combineLatest3<EmptyState, List<ITEM>?, bool, PagingViewInfo<ITEM>>(
     pagingEmptyState, listItems, isHasNext, (emptyState, listItems, isHasNext) => PagingViewInfo(emptyState, listItems, isHasNext)
   ).distinct();
 
-  Future<void> reload({void onError(dynamic error)}) async {
+  Future<void> reload({void onError(dynamic error)?}) async {
     _pagingTrigger.add(PagingLoadOperate(PagingLoadType.ReLoad, onError: onError));
     await pagingProgress.firstWhere((progress) => progress is Complete);
 
   }
 
-  Future<void> loadNext({void onError(dynamic error)}) async {
+  Future<void> loadNext({void onError(dynamic error)?}) async {
     _pagingTrigger.add(PagingLoadOperate(PagingLoadType.LoadNext, onError: onError));
     await pagingProgress.firstWhere((progress) => progress is Complete);
   }
