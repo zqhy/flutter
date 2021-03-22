@@ -9,14 +9,14 @@ class ToastService extends IToastService {
 
   @override
   show(String message, {
-    ToastLength toastLength,
-    int timeInSec,
-    ToastGravity gravity,
-    double fontSize,
-    Color backgroundColor,
-    Color textColor,
+    ToastLength? toastLength,
+    int? timeInSec,
+    ToastGravity? gravity,
+    double? fontSize,
+    Color? backgroundColor,
+    Color? textColor
   }) {
-    if (message?.isNotEmpty != true) {
+    if (message.isEmpty) {
       return;
     }
     toast.Fluttertoast.showToast(
@@ -31,7 +31,7 @@ class ToastService extends IToastService {
   }
 }
 
-toast.Toast toastOf(ToastLength toastLength) {
+toast.Toast? toastOf(ToastLength? toastLength) {
   if (toastLength == null) {
     return null;
   }
@@ -45,7 +45,7 @@ toast.Toast toastOf(ToastLength toastLength) {
   }
 }
 
-toast.ToastGravity toastGravityOf(ToastGravity gravity) {
+toast.ToastGravity? toastGravityOf(ToastGravity? gravity) {
   if (gravity == null) {
     return null;
   }
