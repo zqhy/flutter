@@ -28,13 +28,13 @@ class LocalStorage extends ILocalStorage {
   }
 
   @override
-  T? get<T>(String key, T transformer(Map map), {T? defValue}) {
-    final map = getObject(key);
-    return map == null ? defValue : transformer(map);
+  T? get<T>(String key, T transformer(dynamic map), {T? defValue}) {
+    final jsonObject = getJsonObject(key);
+    return jsonObject == null ? defValue : transformer(jsonObject);
   }
 
   @override
-  Map? getObject(String key) {
+  dynamic getJsonObject(String key) {
     final data = _sharedPreferences.getString(key);
     return data != null && data.isNotEmpty ? json.decode(data) : null;
   }
@@ -91,11 +91,6 @@ class LocalStorage extends ILocalStorage {
   @override
   Future<bool> putStringList(String key, List<String> value) {
     return _sharedPreferences.setStringList(key, value);
-  }
-
-  @override
-  dynamic getDynamic(String key, {Object? defValue}) {
-    return _sharedPreferences.get(key) ?? defValue;
   }
 
   @override
