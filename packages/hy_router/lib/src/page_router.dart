@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
 
-typedef dynamic CreateAppRoute(Map<dynamic, dynamic>? params);
+typedef dynamic CreateAppRoute(Map<String, dynamic> params);
 typedef Widget PageBuilder(BuildContext context, dynamic params);
 
 class RouterHandler<RP extends Object> {
@@ -78,7 +78,7 @@ class PageRouter {
 
   static PathInfo getPathInfo(String path) {
     var routeName = path;
-    Map<dynamic, dynamic>? params;
+    Map<String, dynamic>? params;
     if (path.contains("?")) {
       var splitParam = path.split("?");
       routeName = splitParam[0];
@@ -90,24 +90,26 @@ class PageRouter {
       return PathInfo(routeName, null);
     }
 
-    return PathInfo(routeName, createRouteParams(params));
+    return PathInfo(routeName, params == null ? null : createRouteParams(params));
   }
 
-  static Map<dynamic, dynamic> _parseParams(String paramsString) {
+  static Map<String, dynamic> _parseParams(String paramsString) {
     return paramsString.startsWith("{")
         ? json.decode(paramsString)
         : parseQueryString(paramsString);
   }
 
-  static Map<dynamic, dynamic> parseQueryString(String query) {
+  static Map<String, dynamic> parseQueryString(String query) {
     var search = RegExp('([^&=]+)=?([^&]*)');
-    var params = Map<dynamic, dynamic>();
+    var params = Map<String, dynamic>();
     if (query.startsWith('?')) query = query.substring(1);
     decode(String? s) => s == null ? null : Uri.decodeComponent(s.replaceAll('+', ' '));
     for (Match match in search.allMatches(query)) {
       var key = decode(match.group(1));
       var value = decode(match.group(2));
-      params[key] = value;
+      if (key != null) {
+        params[key] = value;
+      }
     }
     return params;
   }
