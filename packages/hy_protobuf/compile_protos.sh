@@ -9,6 +9,6 @@ done
 
 #dartfmt -w lib/generated/protos
 
-find lib/generated/protos -name "*.pbenum.dart" -exec rm -f {} \;
+#find lib/generated/protos -name "*.pbenum.dart" -exec rm -f {} \;
 find lib/generated/protos -name "*.pbjson.dart" -exec rm -f {} \;
 find lib/generated/protos -name "*.pbserver.dart" -exec rm -f {} \;
