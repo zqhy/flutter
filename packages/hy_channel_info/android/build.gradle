@@ -31,3 +31,7 @@ android {
         disable 'InvalidPackage'
     }
 }
+
+dependencies {
+    api 'com.leon.channel:helper:2.0.3'
+}

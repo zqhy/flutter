@@ -1,9 +1,12 @@
 package com.hy.channel.info.hy_channel_info;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+
+import com.leon.channel.helper.ChannelReaderUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -14,7 +17,6 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
-import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 /** HyChannelInfoPlugin */
 public class HyChannelInfoPlugin implements FlutterPlugin, MethodCallHandler {
@@ -32,7 +34,12 @@ public class HyChannelInfoPlugin implements FlutterPlugin, MethodCallHandler {
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
-    channelInfo = getAssetsText(flutterPluginBinding.getApplicationContext(), FILE_NAME_AGENT);
+    Context context = flutterPluginBinding.getApplicationContext();
+    channelInfo = getAssetsText(context, FILE_NAME_AGENT);
+    if (TextUtils.isEmpty(channelInfo)) {
+      channelInfo = ChannelReaderUtil.getChannel(context);
+    }
+
     channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "hy_channel_info");
     channel.setMethodCallHandler(this);
   }
@@ -83,6 +90,6 @@ public class HyChannelInfoPlugin implements FlutterPlugin, MethodCallHandler {
     while((count = in.read(data,0,BUFFER_SIZE)) != -1)
       outStream.write(data, 0, count);
 
-    return new String(outStream.toByteArray(), encoding);
+    return outStream.toString(encoding);
   }
 }

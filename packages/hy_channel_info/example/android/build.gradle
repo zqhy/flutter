@@ -6,6 +6,7 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.0'
+        classpath 'com.leon.channel:plugin:2.0.3'
     }
 }
 
