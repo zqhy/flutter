@@ -1,6 +1,6 @@
 name: hy_channel_info
 description: get app channel info.
-version: 2.0.0
+version: 2.0.1
 homepage: http://a.gitlab.local:10080/flutter/hy
 
 environment:

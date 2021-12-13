@@ -35,10 +35,7 @@ public class HyChannelInfoPlugin implements FlutterPlugin, MethodCallHandler {
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
     Context context = flutterPluginBinding.getApplicationContext();
-    channelInfo = getAssetsText(context, FILE_NAME_AGENT);
-    if (TextUtils.isEmpty(channelInfo)) {
-      channelInfo = ChannelReaderUtil.getChannel(context);
-    }
+    channelInfo = getChannel(context);
 
     channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "hy_channel_info");
     channel.setMethodCallHandler(this);
@@ -56,6 +53,18 @@ public class HyChannelInfoPlugin implements FlutterPlugin, MethodCallHandler {
   @Override
   public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
     channel.setMethodCallHandler(null);
+  }
+
+  public static String getChannel(Context context, String fileName) {
+    String channelInfo = getAssetsText(context, fileName);
+    if (TextUtils.isEmpty(channelInfo)) {
+      channelInfo = ChannelReaderUtil.getChannel(context);
+    }
+    return channelInfo;
+  }
+
+  public static String getChannel(Context context) {
+    return getChannel(context, FILE_NAME_AGENT);
   }
 
   public static String getAssetsText(Context context, String fileName) {
