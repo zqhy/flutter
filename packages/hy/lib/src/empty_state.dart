@@ -20,5 +20,6 @@ class EmptyFailure extends EmptyState {
 
 class HasContent<T> extends EmptyState {
   final T? content;
-  HasContent(this.content, {String? message}) : super(message);
+  final bool isHasMoreContent;
+  HasContent(this.content, {this.isHasMoreContent = false,  String? message}) : super(message);
 }

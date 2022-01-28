@@ -20,6 +20,7 @@ export 'src/extensions/standard_ext.dart';
 export 'src/extensions/duration_ext.dart';
 export 'src/extensions/dynamic_ext.dart';
 export 'src/extensions/string_ext.dart';
+export 'src/extensions/empty_state_extensions.dart';
 export 'src/extensions/datetime_ext.dart';
 export 'src/extensions/iterable_ext.dart';
 export 'src/extensions/progress_ext.dart';
