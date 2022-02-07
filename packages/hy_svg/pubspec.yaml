@@ -1,6 +1,6 @@
 name: hy_svg
 description: A new Flutter package.
-version: 0.0.1
+version: 1.0.0
 homepage: http://a.gitlab.local:10080/flutter/hy
 
 environment:
@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  flutter_svg: ^0.19.1
+  flutter_svg: ^1.0.3
 
 dev_dependencies:
   flutter_test:
