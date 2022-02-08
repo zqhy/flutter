@@ -5,7 +5,7 @@ import 'package:sqflite/sqflite.dart';
 import 'event/db_event.dart';
 
 abstract class IDbContext {
-  void setConnectionString(String connectionString);
+  void setConnectionString(String? connectionString);
   String? get connectionString;
   Future<Database?> get database;
   Stream<DbEvent> get event;
@@ -26,7 +26,7 @@ abstract class DbContext implements IDbContext {
   Future<Database> createDatabase(String connectionString);
 
   @override
-  void setConnectionString(String connectionString) {
+  void setConnectionString(String? connectionString) {
     _connectionString = connectionString;
   }
 
