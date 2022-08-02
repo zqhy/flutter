@@ -18,8 +18,6 @@ abstract class IAppAnalytics {
   Future<void> logEcommercePurchase({String? currency, double? value, String? transactionId,});
   /// 退款
   Future<void> logPurchaseRefund({String? currency, double? value, String? transactionId,});
-  Future<void> logViewItem({required String itemId, required String itemName, required String itemCategory,});
-  Future<void> logViewItemList({required String itemCategory,});
 
   Future<void> setUserId(String? id);
   Future<void> setUserProperty({required String name, required String? value});

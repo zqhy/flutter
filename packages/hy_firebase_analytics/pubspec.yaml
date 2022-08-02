@@ -1,19 +1,18 @@
 name: hy_firebase_analytics
 description: firebase analysis implementation of the hy analytics interface.
-version: 1.0.0
+version: 2.0.0
 homepage: http://a.gitlab.local:10080/flutter/hy
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
-  flutter: ">=1.20.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  hy_analytics: ^1.0.0
+  hy_analytics: ^2.0.0
 
-  firebase_analytics: ^8.1.0
+  firebase_analytics: ^9.3.0
 
 dev_dependencies:
   flutter_test:

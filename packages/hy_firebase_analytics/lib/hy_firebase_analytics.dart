@@ -50,14 +50,6 @@ class AppFirebaseAnalytics implements IAppAnalytics {
       _firebaseAnalytics.logSpendVirtualCurrency(itemName: itemName, virtualCurrencyName: virtualCurrencyName, value: value);
 
   @override
-  Future<void> logViewItem({required String itemId, required String itemName, required String itemCategory}) =>
-      _firebaseAnalytics.logViewItem(itemId: itemId, itemName: itemName, itemCategory: itemCategory);
-
-  @override
-  Future<void> logViewItemList({required String itemCategory}) =>
-      _firebaseAnalytics.logViewItemList(itemCategory: itemCategory);
-
-  @override
   Future<void> resetAnalyticsData() =>
       _firebaseAnalytics.resetAnalyticsData();
 
@@ -71,7 +63,7 @@ class AppFirebaseAnalytics implements IAppAnalytics {
 
   @override
   Future<void> setUserId(String? id) =>
-      _firebaseAnalytics.setUserId(id);
+      _firebaseAnalytics.setUserId(id: id);
 
   @override
   Future<void> setUserProperty({required String name, required String? value}) =>
