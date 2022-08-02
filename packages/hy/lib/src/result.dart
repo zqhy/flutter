@@ -1,7 +1,7 @@
 abstract class Result{}
 
 class Success<V> implements Result {
-  final V? value;
+  final V value;
   final String? message;
 
   const Success(this.value, {this.message});
