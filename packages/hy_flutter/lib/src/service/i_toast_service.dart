@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 enum ToastLength { LENGTH_SHORT, LENGTH_LONG }
@@ -18,6 +16,7 @@ class ToastConfig {
 abstract class IToastService{
   show(String message, {
     ToastLength? toastLength,
+    Duration? toastDuration,
     int? timeInSec,
     ToastGravity? gravity,
     double? fontSize,

@@ -10,6 +10,7 @@ class ToastService extends IToastService {
   @override
   show(String message, {
     ToastLength? toastLength,
+    Duration? toastDuration,
     int? timeInSec,
     ToastGravity? gravity,
     double? fontSize,
