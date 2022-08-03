@@ -30,5 +30,6 @@ export 'src/supports/i_logged_required.dart';
 export 'src/supports/i_dispose.dart';
 
 export 'src/service/i_logger.dart';
+export 'src/service/i_storage.dart';
 
 export 'src/translation/i_pinyin.dart';

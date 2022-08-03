@@ -1,3 +1,7 @@
+## 2.0.1
+
+* export `i_storage.dart`
+
 ## 2.0.0
 
 * add `IStorage`
