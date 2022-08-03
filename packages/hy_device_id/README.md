@@ -1,6 +1,6 @@
 # hy_device_id
 
-A new Flutter plugin project.
+Flutter plugin for get immutable device identifier.
 
 ## Getting Started
 
