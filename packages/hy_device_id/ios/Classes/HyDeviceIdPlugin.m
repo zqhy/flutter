@@ -1,4 +1,5 @@
 #import "HyDeviceIdPlugin.h"
+#import <UICKeyChainStore/UICKeyChainStore.h>
 
 @implementation HyDeviceIdPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
@@ -11,7 +12,14 @@
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
   if ([@"getDeviceId" isEqualToString:call.method]) {
-    result([@"iOS " stringByAppendingString:[[UIDevice currentDevice] systemVersion]]);
+    UICKeyChainStore *keychain = [UICKeyChainStore keyChainStoreWithService:@"studio.creche.immutable_device_identifier"];
+    NSString *key = @"studio.creche.immutable_device_identifier/unique_id";
+    NSString *uuid = keychain[key];
+    if (uuid == nil || uuid.length < 1) {
+      uuid = [NSUUID UUID].UUIDString;
+      keychain[key] = uuid;
+    }
+    result(uuid);
   } else {
     result(FlutterMethodNotImplemented);
   }

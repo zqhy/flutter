@@ -1,0 +1,29 @@
+PODS:
+  - Flutter (1.0.0)
+  - hy_device_id (0.0.1):
+    - Flutter
+    - UICKeyChainStore
+  - UICKeyChainStore (2.2.1)
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - hy_device_id (from `.symlinks/plugins/hy_device_id/ios`)
+
+SPEC REPOS:
+  trunk:
+    - UICKeyChainStore
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  hy_device_id:
+    :path: ".symlinks/plugins/hy_device_id/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  hy_device_id: 022c7633cef2986616fb663569ed02ef9abfd2e2
+  UICKeyChainStore: ba3bff2c762b12db1e516f395c837dd25298b05e
+
+PODFILE CHECKSUM: 8e679eca47255a8ca8067c4c67aab20e64cb974d
+
+COCOAPODS: 1.11.3
