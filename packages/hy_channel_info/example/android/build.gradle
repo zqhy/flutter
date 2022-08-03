@@ -1,19 +1,23 @@
 buildscript {
+    ext.kotlin_version = '1.7.10'
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.4'
-        classpath 'com.leon.channel:plugin:2.0.3'
+        classpath 'com.android.tools.build:gradle:7.2.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        // https://github.com/Meituan-Dianping/walle
+        // https://github.com/Tencent/VasDolly
+        classpath 'com.tencent.vasdolly:plugin:3.0.4'
     }
 }
 
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 

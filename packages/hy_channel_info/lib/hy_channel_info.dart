@@ -1,13 +1,8 @@
-import 'dart:async';
 
-import 'package:flutter/services.dart';
+import 'hy_channel_info_platform_interface.dart';
 
 class HyChannelInfo {
-  static const MethodChannel _channel =
-      const MethodChannel('hy_channel_info');
-
-  static Future<String?> get channelInfo async {
-    final String? version = await _channel.invokeMethod('getChannelInfo');
-    return version;
+  Future<String?> getChannelInfo() {
+    return HyChannelInfoPlatform.instance.getChannelInfo();
   }
 }

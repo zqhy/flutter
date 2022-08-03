@@ -1,7 +1,7 @@
 name: hy_device_id
 description: A new Flutter plugin project.
 version: 0.0.1
-homepage: http://a.gitlab.local:10080/flutter/hy
+homepage: https://github.com/zqhy/flutter
 
 environment:
   sdk: ">=2.17.5 <3.0.0"

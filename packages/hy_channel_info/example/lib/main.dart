@@ -5,31 +5,36 @@ import 'package:flutter/services.dart';
 import 'package:hy_channel_info/hy_channel_info.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
-  _MyAppState createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  String? _channel;
+  String _channelInfo = 'Unknown';
+  final _hyChannelInfoPlugin = HyChannelInfo();
 
   @override
   void initState() {
     super.initState();
-    initChannelState();
+    initPlatformState();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initChannelState() async {
-    String? channelInfo;
+  Future<void> initPlatformState() async {
+    String channelInfo;
     // Platform messages may fail, so we use a try/catch PlatformException.
+    // We also handle the message potentially returning null.
     try {
-      channelInfo = await HyChannelInfo.channelInfo;
+      channelInfo =
+          await _hyChannelInfoPlugin.getChannelInfo() ?? 'Unknown channel info';
     } on PlatformException {
-      channelInfo = 'Failed to get device Id.';
+      channelInfo = 'Failed to get channel info.';
     }
 
     // If the widget was removed from the tree while the asynchronous platform
@@ -38,7 +43,7 @@ class _MyAppState extends State<MyApp> {
     if (!mounted) return;
 
     setState(() {
-      _channel = channelInfo;
+      _channelInfo = channelInfo;
     });
   }
 
@@ -47,11 +52,14 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('Get channel info'),
         ),
-        body: Center(
-          child: Text('Running on: ${_channel ?? 'Unknown'}\n'),
-        ),
+        body: Column(
+          children: [
+            OutlinedButton(onPressed: initPlatformState, child: const Text("get channel info")),
+            Text('channel info: \n$_channelInfo'),
+          ],
+        )
       ),
     );
   }
