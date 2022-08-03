@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:hy_flutter/hy_flutter.dart';
+import 'package:hy/hy.dart';
 
 
 // https://github.com/Sky24n/flustars/blob/master/lib/src/sp_util.dart
-class LocalStorage extends ILocalStorage {
+class LocalStorage extends IStorage {
   static LocalStorage? _singleton;
   static late SharedPreferences _sharedPreferences;
 
