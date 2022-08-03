@@ -1,23 +1,29 @@
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hy_channel_info/hy_channel_info.dart';
+import 'package:hy_channel_info/hy_channel_info_platform_interface.dart';
+import 'package:hy_channel_info/hy_channel_info_method_channel.dart';
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+
+class MockHyChannelInfoPlatform 
+    with MockPlatformInterfaceMixin
+    implements HyChannelInfoPlatform {
+
+  @override
+  Future<String?> getChannelInfo() => Future.value('42');
+}
 
 void main() {
-  const MethodChannel channel = MethodChannel('hy_channel_info');
+  final HyChannelInfoPlatform initialPlatform = HyChannelInfoPlatform.instance;
 
-  TestWidgetsFlutterBinding.ensureInitialized();
-
-  setUp(() {
-    channel.setMockMethodCallHandler((MethodCall methodCall) async {
-      return '42';
-    });
-  });
-
-  tearDown(() {
-    channel.setMockMethodCallHandler(null);
+  test('$MethodChannelHyChannelInfo is the default instance', () {
+    expect(initialPlatform, isInstanceOf<MethodChannelHyChannelInfo>());
   });
 
   test('getChannelInfo', () async {
-    expect(await HyChannelInfo.channelInfo, '42');
+    HyChannelInfo hyChannelInfoPlugin = HyChannelInfo();
+    MockHyChannelInfoPlatform fakePlatform = MockHyChannelInfoPlatform();
+    HyChannelInfoPlatform.instance = fakePlatform;
+  
+    expect(await hyChannelInfoPlugin.getChannelInfo(), '42');
   });
 }
