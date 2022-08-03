@@ -1,19 +1,23 @@
-## 2.0.0 - 2022-08-02 11:16:19
+## 2.0.1
 
- - `ToastService.show` 接口增加参数 `toastDuration`
+* upgrade dependencies `hy_flutter` to v2.0.1
 
-## 0.0.4 - 2020-12-24 16:35:13
+## 2.0.0
 
- - `ToastService.show` 增加默认配置类实现
+* `ToastService.show` 接口增加参数 `toastDuration`
 
-## 0.0.3 - 2020-12-24 15:33:57
+## 0.0.4
 
- - `ToastService.show` add `timeInSec` parameter.
+* `ToastService.show` 增加默认配置类实现
 
-## 0.0.2 - 2020-12-21 14:33:33
+## 0.0.3
 
- - `hy_fluttertoast`中的`fluttertoast`升级到v7.1.6
+* `ToastService.show` add `timeInSec` parameter.
 
-## 0.0.1 - 2020-10-28 17:23:01
+## 0.0.2
 
- - first edition.
+* `hy_fluttertoast`中的`fluttertoast`升级到v7.1.6
+
+## 0.0.1
+
+* first edition.
