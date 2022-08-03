@@ -2,34 +2,38 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:hy_channel_info/hy_channel_info.dart';
+import 'package:hy_device_id/hy_device_id.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
-  _MyAppState createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  String? _channel;
+  String _deviceId = 'Unknown';
+  final _hyDeviceIdPlugin = HyDeviceId();
 
   @override
   void initState() {
     super.initState();
-    initChannelState();
+    initPlatformState();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initChannelState() async {
-    String? channelInfo;
+  Future<void> initPlatformState() async {
+    String deviceId;
     // Platform messages may fail, so we use a try/catch PlatformException.
+    // We also handle the message potentially returning null.
     try {
-      channelInfo = await HyChannelInfo.channelInfo;
+      deviceId = await _hyDeviceIdPlugin.getDeviceId() ?? 'Unknown device Id';
     } on PlatformException {
-      channelInfo = 'Failed to get device Id.';
+      deviceId = 'Failed to get device Id.';
     }
 
     // If the widget was removed from the tree while the asynchronous platform
@@ -37,8 +41,10 @@ class _MyAppState extends State<MyApp> {
     // setState to update our non-existent appearance.
     if (!mounted) return;
 
+    print("获取到 device Id：$deviceId");
+
     setState(() {
-      _channel = channelInfo;
+      _deviceId = deviceId;
     });
   }
 
@@ -47,10 +53,13 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('Get device Id'),
         ),
-        body: Center(
-          child: Text('Running on: ${_channel ?? 'Unknown'}\n'),
+        body: Column(
+          children: [
+            OutlinedButton(onPressed: initPlatformState, child: const Text("get device Id")),
+            Text('device Id: \n$_deviceId'),
+          ],
         ),
       ),
     );
