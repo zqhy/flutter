@@ -1,0 +1,22 @@
+PODS:
+  - FlutterMacOS (1.0.0)
+  - hy_device_id (0.0.1):
+    - FlutterMacOS
+
+DEPENDENCIES:
+  - FlutterMacOS (from `Flutter/ephemeral`)
+  - hy_device_id (from `Flutter/ephemeral/.symlinks/plugins/hy_device_id/macos`)
+
+EXTERNAL SOURCES:
+  FlutterMacOS:
+    :path: Flutter/ephemeral
+  hy_device_id:
+    :path: Flutter/ephemeral/.symlinks/plugins/hy_device_id/macos
+
+SPEC CHECKSUMS:
+  FlutterMacOS: 57701585bf7de1b3fc2bb61f6378d73bbdea8424
+  hy_device_id: 298929b4b524897800607cd1793f7482ab9c9fe7
+
+PODFILE CHECKSUM: 6eac6b3292e5142cfc23bdeb71848a40ec51c14c
+
+COCOAPODS: 1.11.3
