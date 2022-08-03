@@ -8,5 +8,5 @@ import Foundation
 import hy_channel_info
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
-  HyChannelInfoOther.register(with: registry.registrar(forPlugin: "HyChannelInfoOther"))
+  HyChannelInfoPlugin.register(with: registry.registrar(forPlugin: "HyChannelInfoPlugin"))
 }

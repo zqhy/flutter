@@ -45,5 +45,7 @@
 	<false/>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<key>channel_info</key>
+	<string>AppStore</string>
 </dict>
 </plist>

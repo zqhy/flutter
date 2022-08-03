@@ -47,10 +47,7 @@ flutter:
 #      linux:
 #        pluginClass: HyChannelInfoPlugin
       macos:
-        pluginClass: HyChannelInfoOther
-        fileName: hy_channel_info_other.dart
-#      macos:
-#        pluginClass: HyChannelInfoPlugin
+        pluginClass: HyChannelInfoPlugin
       windows:
         pluginClass: HyChannelInfoOther
         fileName: hy_channel_info_other.dart
