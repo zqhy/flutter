@@ -4,7 +4,7 @@ class Success<V> implements Result {
   final V value;
   final String? message;
 
-  const Success(this.value, {this.message});
+  const Success(this.value, [this.message]);
 }
 
 class Failure<E> implements Result {
@@ -12,5 +12,5 @@ class Failure<E> implements Result {
   final E? error;
   final StackTrace? stackTrace;
 
-  const Failure({this.message, this.error, this.stackTrace});
+  const Failure([this.message, this.error, this.stackTrace]);
 }

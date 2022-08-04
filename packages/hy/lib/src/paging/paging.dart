@@ -4,7 +4,7 @@ class Paging<ITEM> {
   final dynamic nextPage;
   final String? emptyTips;
 
-  Paging({required List<ITEM> items, this.nextPage, this.emptyTips}): _items = items;
+  Paging(List<ITEM> items, {this.nextPage, this.emptyTips}): _items = items;
 
   void setItems(List<ITEM> items) {
     _items = items;

@@ -9,5 +9,5 @@ class InProgress<T> implements Progress<T> {
 class Complete<T> implements Progress<T> {
   final T? result;
 
-  Complete({this.result});
+  Complete([this.result]);
 }

@@ -5,5 +5,5 @@ class PagingViewInfo<ITEM> {
   final List<ITEM>? listItems;
   final bool? isHasNext;
 
-  PagingViewInfo(this.emptyState, this.listItems, this.isHasNext);
+  PagingViewInfo(this.emptyState, [this.listItems, this.isHasNext]);
 }

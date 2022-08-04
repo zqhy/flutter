@@ -1,3 +1,7 @@
+## 2.0.3
+
+* changed `EmptyState`, `Paging`, `PagingViewInfo`, `Progress`, `Result` related parameters
+
 ## 2.0.2
 
 * `Failure` add `StackTrace`
