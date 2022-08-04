@@ -44,10 +44,10 @@ mixin RxPagingBloc<ITEM, C extends Paging<ITEM>> on IDispose {
         if (progress is Complete) {
           final result = (progress as Complete).result;
           if (result is Success) {
-            return Empty(message: result.value.emptyTips);
+            return Empty(result.value.emptyTips);
           } else {
             final failure = result as Failure;
-            return EmptyFailure(error: failure.error, message: failure.message);
+            return EmptyFailure(failure.message, failure.error);
           }
         } else {
           return EmptyLoading();

@@ -29,9 +29,9 @@ extension PagingLoaderExt<ITEM, C extends Paging<ITEM>> on PagingDataLoader<Futu
               operate?.onError?.also((onError) {
                 onError(error, stackTrace);
               });
-              return Failure(error: error, stackTrace: stackTrace);
+              return Failure(null, error, stackTrace);
             })
-            .map<Progress<Result>>((result) => Complete(result: result))
+            .map<Progress<Result>>((result) => Complete(result))
             .startWith(InProgress<Result>())
     );
   }

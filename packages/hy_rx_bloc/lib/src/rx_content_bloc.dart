@@ -41,7 +41,7 @@ mixin RxContentBloc<C> on IDispose {
             return Empty();
           } else {
             final failure = result as Failure;
-            return EmptyFailure(error: failure.error, message: failure.message);
+            return EmptyFailure(failure.message, failure.error);
           }
         } else {
           return EmptyLoading();
