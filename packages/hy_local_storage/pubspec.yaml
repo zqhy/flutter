@@ -1,6 +1,6 @@
 name: hy_local_storage
 description: local storage.
-version: 2.0.1
+version: 2.0.2
 homepage: https://github.com/zqhy/flutter
 
 environment:
@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  hy: ^2.0.1
+  hy: ^2.0.2
   shared_preferences: ^2.0.15
 
 dev_dependencies:
