@@ -1,14 +1,14 @@
 name: hy_logger
 description: logger package.
-version: 1.0.0
+version: 2.0.0
 homepage: https://github.com/zqhy/flutter
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
-  hy: ^1.0.0
-  logger: ^1.0.0
+  hy: ^2.0.2
+  logger: ^1.1.0
 
 dev_dependencies:
   test: ^1.16.8
