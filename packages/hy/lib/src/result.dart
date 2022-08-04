@@ -8,8 +8,9 @@ class Success<V> implements Result {
 }
 
 class Failure<E> implements Result {
-  final E? error;
   final String? message;
+  final E? error;
+  final StackTrace? stackTrace;
 
-  const Failure(this.error, {this.message});
+  const Failure({this.message, this.error, this.stackTrace});
 }

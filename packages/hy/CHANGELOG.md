@@ -1,3 +1,7 @@
+## 2.0.2
+
+* `Failure` add `StackTrace`
+
 ## 2.0.1
 
 * export `i_storage.dart`
