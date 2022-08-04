@@ -1,0 +1,22 @@
+PODS:
+  - Flutter (1.0.0)
+  - hy_channel_info (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - hy_channel_info (from `.symlinks/plugins/hy_channel_info/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  hy_channel_info:
+    :path: ".symlinks/plugins/hy_channel_info/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  hy_channel_info: c3aed7d8e5672c4d2bc81657500daee7744f64ef
+
+PODFILE CHECKSUM: 8e679eca47255a8ca8067c4c67aab20e64cb974d
+
+COCOAPODS: 1.11.3

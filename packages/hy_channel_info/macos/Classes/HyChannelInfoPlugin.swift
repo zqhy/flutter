@@ -11,7 +11,7 @@ public class HyChannelInfoPlugin: NSObject, FlutterPlugin {
   public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
     switch call.method {
     case "getChannelInfo":
-      result("macOS " + ProcessInfo.processInfo.operatingSystemVersionString)
+      result(Bundle.main.object(forInfoDictionaryKey: "channel_info"))
     default:
       result(FlutterMethodNotImplemented)
     }
