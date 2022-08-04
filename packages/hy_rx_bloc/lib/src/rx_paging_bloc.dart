@@ -67,13 +67,13 @@ mixin RxPagingBloc<ITEM, C extends Paging<ITEM>> on IDispose {
     pagingEmptyState, listItems, isHasNext, (emptyState, listItems, isHasNext) => PagingViewInfo(emptyState, listItems, isHasNext)
   ).distinct();
 
-  Future<void> reload({void onError(dynamic error)?}) async {
+  Future<void> reload({void onError(Object error, StackTrace stackTrace)?}) async {
     _pagingTrigger.add(PagingLoadOperate(PagingLoadType.ReLoad, onError: onError));
     await pagingProgress.firstWhere((progress) => progress is Complete);
 
   }
 
-  Future<void> loadNext({void onError(dynamic error)?}) async {
+  Future<void> loadNext({void onError(Object error, StackTrace stackTrace)?}) async {
     _pagingTrigger.add(PagingLoadOperate(PagingLoadType.LoadNext, onError: onError));
     await pagingProgress.firstWhere((progress) => progress is Complete);
   }

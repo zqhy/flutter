@@ -25,11 +25,11 @@ extension PagingLoaderExt<ITEM, C extends Paging<ITEM>> on PagingDataLoader<Futu
               paging.setItems(_lastListItems);
               return Success<C>(paging);
             })
-            .onErrorReturnWith((error) {
+            .onErrorReturnWith((error, stackTrace) {
               operate?.onError?.also((onError) {
-                onError(error);
+                onError(error, stackTrace);
               });
-              return Failure(error);
+              return Failure(error: error, stackTrace: stackTrace);
             })
             .map<Progress<Result>>((result) => Complete(result: result))
             .startWith(InProgress<Result>())
@@ -43,7 +43,7 @@ enum PagingLoadType {
 
 class PagingLoadOperate {
   final PagingLoadType type;
-  final void Function(dynamic error)? onError;
+  final void Function(Object error, StackTrace stackTrace)? onError;
 
   PagingLoadOperate(this.type, {this.onError});
 }

@@ -12,11 +12,11 @@ extension ContentLoaderExt<C> on ContentDataLoader<Future<C>> {
         .switchMap<Progress<Result>>((t) =>
         Stream.fromFuture(this())
             .map<Result>((value) => Success<C>(value))
-            .onErrorReturnWith((error) {
+            .onErrorReturnWith((error, stackTrace) {
           operate?.onError?.also((onError) {
-            onError(error);
+            onError(error, stackTrace);
           });
-          return Failure(error);
+          return Failure(error: error, stackTrace: stackTrace);
         })
             .map<Progress<Result>>((result) => Complete(result: result))
             .startWith(InProgress<Result>())
@@ -25,7 +25,7 @@ extension ContentLoaderExt<C> on ContentDataLoader<Future<C>> {
 }
 
 class ContentLoaderOperate {
-  final void Function(dynamic error)? onError;
+  final void Function(Object error, StackTrace stackTrace)? onError;
 
   ContentLoaderOperate({this.onError});
 }

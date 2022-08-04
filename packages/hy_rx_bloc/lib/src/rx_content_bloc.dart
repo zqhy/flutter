@@ -53,7 +53,7 @@ mixin RxContentBloc<C> on IDispose {
     return _contentEmptyState!;
   }
 
-  Future<void> load({void onError(dynamic error)?}) async {
+  Future<void> load({void onError(Object error, StackTrace stackTrace)?}) async {
     _contentTrigger.add(ContentLoaderOperate(onError: onError));
     await contentProgress.firstWhere((progress) => progress is Complete);
   }
