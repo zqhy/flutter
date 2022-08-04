@@ -1,3 +1,7 @@
+## 2.0.2
+
+* 使用新的模版创建插件
+
 ## 0.0.1
 
-* TODO: Describe initial release.
+* first edition.

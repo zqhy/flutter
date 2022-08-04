@@ -1,5 +1,5 @@
 name: hy_pinyin
-description: A new Flutter package project.
+description: Chinese character conversion pinyin library.Accurate and complete Chinese character dictionary.Fast conversion.
 version: 2.0.0
 homepage: https://github.com/zqhy/flutter
 

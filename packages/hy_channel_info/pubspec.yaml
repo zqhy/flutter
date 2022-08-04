@@ -1,6 +1,6 @@
 name: hy_channel_info
-description: A new Flutter plugin project.
-version: 0.0.1
+description: get app channel info.
+version: 2.0.2
 homepage: https://github.com/zqhy/flutter
 
 environment:
@@ -12,7 +12,7 @@ dependencies:
     sdk: flutter
   flutter_web_plugins:
     sdk: flutter
-  plugin_platform_interface: ^2.0.2
+  plugin_platform_interface: ^2.1.2
 
 dev_dependencies:
   flutter_test:
