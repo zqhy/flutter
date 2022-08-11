@@ -9,7 +9,7 @@ extension ProgressExt on Progress {
       : null;
 
   V? contentOrNull<V>() {
-    return resultOrNull<Result>()?.valueOrNull<V>();
+    return resultOrNull<Result>()?.dataOrNull<V>();
   }
 
   bool get isInProgress  => this is InProgress;

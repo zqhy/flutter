@@ -1,3 +1,7 @@
-## [0.0.1] - 2020-10-28 17:59:03
+## 2.0.0
+
+* upgrade dependencies
+
+## 0.0.1
 
 * first edition.

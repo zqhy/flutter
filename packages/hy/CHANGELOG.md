@@ -1,3 +1,7 @@
+## 2.1.0
+
+* restructure `Result`
+
 ## 2.0.3
 
 * changed `EmptyState`, `Paging`, `PagingViewInfo`, `Progress`, `Result` related parameters

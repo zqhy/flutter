@@ -2,8 +2,8 @@ import '../result.dart';
 
 extension ResultExt on Result {
 
-  V? valueOrNull<V>() => this is Success
-      ? (this as Success).value
+  T? dataOrNull<T>() => this is Success
+      ? (this as Success).data
       : null;
 
   E? errorOrNull<E>() => this is Failure
