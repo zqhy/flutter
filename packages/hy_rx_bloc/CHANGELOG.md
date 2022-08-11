@@ -1,3 +1,7 @@
+## 2.1.0
+
+* `hy` upgrade to v2.1.0
+
 ## 2.0.1
 
 * `hy` upgrade to v2.0.3
