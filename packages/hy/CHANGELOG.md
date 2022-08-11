@@ -1,3 +1,7 @@
+## 2.1.1
+
+* restructure `Failure`
+
 ## 2.1.0
 
 * restructure `Result`

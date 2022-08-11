@@ -1,5 +1,4 @@
 abstract class Result<T>{
-  T? get data;
 }
 
 class Success<T> implements Result<T> {
@@ -9,13 +8,10 @@ class Success<T> implements Result<T> {
   const Success(this.data, [this.message]);
 }
 
-class Failure<E> implements Result {
+class Failure<T> implements Result<T> {
   final String? message;
-  final E? error;
+  final Object? error;
   final StackTrace? stackTrace;
 
   const Failure([this.message, this.error, this.stackTrace]);
-
-  @override
-  get data => null;
 }

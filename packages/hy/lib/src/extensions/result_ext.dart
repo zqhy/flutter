@@ -6,7 +6,7 @@ extension ResultExt on Result {
       ? (this as Success).data
       : null;
 
-  E? errorOrNull<E>() => this is Failure
+  Object? errorOrNull() => this is Failure
       ? (this as Failure).error
       : null;
 
