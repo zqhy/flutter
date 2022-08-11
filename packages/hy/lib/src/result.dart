@@ -14,4 +14,6 @@ class Failure<T> implements Result<T> {
   final StackTrace? stackTrace;
 
   const Failure([this.message, this.error, this.stackTrace]);
+
+  Failure.from(Failure failure): this(failure.message, failure.error, failure.stackTrace);
 }

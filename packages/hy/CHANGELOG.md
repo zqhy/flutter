@@ -1,3 +1,7 @@
+## 2.1.2
+
+* `Failure` add `from` create method
+
 ## 2.1.1
 
 * restructure `Failure`
