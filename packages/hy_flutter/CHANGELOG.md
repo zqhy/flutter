@@ -1,3 +1,8 @@
+## 2.0.2
+
+* add `WidgetPaddingExt`
+* update `ContextExt`
+
 ## 2.0.1
 
 * delete `ILocalStorage`
