@@ -1,3 +1,8 @@
+## 2.1.3
+
+* add `SuccessVoid`
+* rich `StringExt`
+
 ## 2.1.2
 
 * `Failure` add `from` create method

@@ -10,6 +10,10 @@ extension ResultExt on Result {
       ? (this as Failure).error
       : null;
 
+  StackTrace? stackTraceOrNull() => this is Failure
+      ? (this as Failure).stackTrace
+      : null;
+
   String? message() => this is Success
       ? (this as Success).message
       : this is Failure
