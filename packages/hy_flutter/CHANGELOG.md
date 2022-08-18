@@ -1,3 +1,7 @@
+## 2.1.0
+
+* `IToastService` delete `setContext`
+
 ## 2.0.3
 
 * `IToastService` add `setContext`

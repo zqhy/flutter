@@ -8,9 +8,6 @@ import 'package:hy_flutter/hy_flutter.dart';
 class ToastService extends IToastService {
 
   @override
-  void setContext(BuildContext context) {}
-
-  @override
   show(String message, {
     ToastLength? toastLength,
     Duration? toastDuration,
