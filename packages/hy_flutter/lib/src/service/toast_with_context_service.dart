@@ -13,12 +13,15 @@ class ToastWithContextService implements IToastService {
   final _fToast = FToast();
   final CreateToastChild createToastChild;
 
-  ToastWithContextService(BuildContext context, {this.createToastChild = _defaultCreateToastChild}) {
+  ToastWithContextService({this.createToastChild = _defaultCreateToastChild});
+
+  @override
+  void setContext(BuildContext context) {
     _fToast.init(context);
   }
 
   @override
-  show(String message, {
+  void show(String message, {
     ToastLength? toastLength,
     Duration? toastDuration,
     int? timeInSec,
@@ -27,7 +30,7 @@ class ToastWithContextService implements IToastService {
     Color? backgroundColor,
     Color? textColor
   }) {
-    if (message.isEmpty) {
+    if (message.isEmpty || _fToast.context == null) {
       return;
     }
     _fToast.showToast(

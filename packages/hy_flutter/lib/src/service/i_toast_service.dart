@@ -14,7 +14,8 @@ class ToastConfig {
 }
 
 abstract class IToastService{
-  show(String message, {
+  void setContext(BuildContext context);
+  void show(String message, {
     ToastLength? toastLength,
     Duration? toastDuration,
     int? timeInSec,
