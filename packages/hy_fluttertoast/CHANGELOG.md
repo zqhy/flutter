@@ -1,3 +1,7 @@
+## 2.1.0
+
+* upgrade dependencies `hy_flutter` to v2.1.0
+
 ## 2.0.2
 
 * upgrade dependencies `hy_flutter` to v2.0.3
