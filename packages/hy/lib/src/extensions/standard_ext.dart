@@ -1,4 +1,4 @@
-extension StandardExt<T extends Object> on T {
+extension StandardExt<T> on T {
   T also(void block(T self)) {
     block(this);
     return this;

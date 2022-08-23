@@ -1,3 +1,7 @@
+## 2.2.0
+
+* reconstruct `StandardExt`
+
 ## 2.1.3
 
 * add `SuccessVoid`
