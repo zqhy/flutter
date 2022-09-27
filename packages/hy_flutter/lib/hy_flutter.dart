@@ -1,6 +1,7 @@
 library hy_flutter;
 
 export 'src/extensions/context_ext.dart';
+export 'src/extensions/theme_data_ext.dart';
 export 'src/extensions/widget_ext.dart';
 
 export 'src/service/i_toast_service.dart';

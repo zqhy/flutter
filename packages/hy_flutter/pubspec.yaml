@@ -1,6 +1,6 @@
 name: hy_flutter
 description: hy's flutter base package.
-version: 2.1.0
+version: 2.2.0
 homepage: https://github.com/zqhy/flutter
 
 environment:

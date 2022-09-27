@@ -1,3 +1,7 @@
+## 2.2.0
+
+* add `ThemeDataExt`
+
 ## 2.1.0
 
 * `IToastService` delete `setContext`
